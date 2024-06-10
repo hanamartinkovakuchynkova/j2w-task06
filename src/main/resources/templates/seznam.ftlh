@@ -1,23 +1,33 @@
 [#ftl]
 [@c.page]
     <div class="seznam">
-        <a href="/detail">
-            <div class="vizitka">
-                <div class="jmeno">Dita (Přikrylová) Formánková</div>
-                <div class="firma">Czechitas z. s.</div>
-                <div class="udaje">
-                    <div class="adresa">
-                        <div>Václavské náměstí 837/11</div>
-                        <div><span>11000</span> <span>Praha 1</span></div>
+        [#if vizitky??]
+            [#list vizitky as vizitka]
+                <a href="/${vizitka.id}">
+                    <div class="vizitka">
+                        <div class="jmeno">${vizitka.celeJmeno}</div>
+                        <div class="firma">${vizitka.firma}</div>
+                        <div class="udaje">
+                            <div class="adresa">
+                                <div>${vizitka.ulice}</div>
+                                <div><span>${vizitka.psc}</span> <span>${vizitka.obec}</span></div>
+                            </div>
+                            <div class="kontakty">
+                                [#if vizitka.email??]
+                                    <div><i class="las la-at"></i> <span>${vizitka.email}</span></div>
+                                [/#if]
+                                [#if vizitka.telefon??]
+                                    <div><i class="las la-phone-alt"></i> <span>${vizitka.telefon}</span></div>
+                                [/#if]
+                                <div><i class="las la-globe"></i> <span>${vizitka.web}</span></div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="kontakty">
-                        <div><i class="las la-at"></i> <span>dita@czechitas.cs</span></div>
-                        <div><i class="las la-phone-alt"></i> <span>+420 800123456</span></div>
-                        <div><i class="las la-globe"></i> <span>www.czechitas.cz</span></div>
-                    </div>
-                </div>
-            </div>
-        </a>
+                </a>
+            [/#list]
+        [#else]
+            <p>No business cards found.</p>
+        [/#if]
 
         <a href="/nova">
             <div class="vizitka vizitka--nova">
